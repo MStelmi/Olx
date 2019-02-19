@@ -9,7 +9,9 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class test {
 
     WebDriver driver;
-    String url = "https://www.google.com";
+    String url = "https://www.olx.pl";
+    String brandCar = "honda";
+    String modelCar = "accord";
 
     public void setup() {
         WebDriverManager.chromedriver().setup();
@@ -29,10 +31,17 @@ public class test {
     }
 
     @Test
-    public void runGooglePage() {
-        driver.findElement(By.name("q")).sendKeys("wikipedia");
-        driver.findElement(By.name("btnK")).click();
+    public void findCar() {
+       String results;
 
+        driver.findElement(By.linkText("Motoryzacja")).click();
+        driver.findElement(By.linkText("Samochody osobowe")).click();
+        driver.findElement(By.linkText("Marka")).click();
+        driver.findElement(By.xpath("//a[@data-code='" + brandCar + "']")).click();
+        driver.findElement(By.xpath("//li[@class='subcategory']")).click();
+        driver.findElement(By.xpath("//label[@data-label='" + modelCar + "']")).click();
+        results = driver.findElement(By.xpath("//table[@summary='Ogłoszenia']")).getText();
+        System.out.println(results);
         driver.close();
     }
 }
