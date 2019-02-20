@@ -4,7 +4,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.junit.jupiter.api.Assertions;
+import java.util.concurrent.TimeUnit;
+
+import static java.lang.Thread.sleep;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class test {
 
@@ -22,6 +31,7 @@ public class test {
     void openSession() {
         setup();
         driver.get(url);
+        driver.manage().window().fullscreen();
     }
 
     @AfterEach
@@ -31,16 +41,25 @@ public class test {
     }
 
     @Test
-    public void findCar() {
+    public void findCar() throws InterruptedException {
        String results;
 
         driver.findElement(By.linkText("Motoryzacja")).click();
         driver.findElement(By.linkText("Samochody osobowe")).click();
-        driver.findElement(By.linkText("Marka")).click();
+        Thread.sleep(5000);
+        driver.findElement(By.xpath("//span[@data-default-label='Marka']")).click();
         driver.findElement(By.xpath("//a[@data-code='" + brandCar + "']")).click();
-        driver.findElement(By.xpath("//li[@class='subcategory']")).click();
-        driver.findElement(By.xpath("//label[@data-label='" + modelCar + "']")).click();
+        Thread.sleep(5000);
+        driver.findElement(By.xpath("//li//div//a//span[@data-default-label='Model']")).click();
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//input[@type='checkbox' and @data-value='" + modelCar + "']")).click();
+        Thread.sleep(10000);
         results = driver.findElement(By.xpath("//table[@summary='Ogłoszenia']")).getText();
+        results.toLowerCase();
+
+        boolean x = results.contains(brandCar + " " + modelCar);
+        assertTrue(x);
+
         System.out.println(results);
         driver.close();
     }
