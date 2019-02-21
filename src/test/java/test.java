@@ -13,14 +13,12 @@ import org.junit.jupiter.api.Assertions;
 import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class test {
 
     WebDriver driver;
     String url = "https://www.olx.pl";
-    String brandCar = "honda";
-    String modelCar = "accord";
 
     public void setup() {
         WebDriverManager.chromedriver().setup();
@@ -43,8 +41,9 @@ public class test {
     @Test
     public void findCar() throws InterruptedException {
        String results;
+       String brandCar = "honda";
+       String modelCar = "accord";
 
-        driver.findElement(By.linkText("Motoryzacja")).click();
         driver.findElement(By.linkText("Samochody osobowe")).click();
         Thread.sleep(5000);
         driver.findElement(By.xpath("//span[@data-default-label='Marka']")).click();
@@ -54,9 +53,7 @@ public class test {
         Thread.sleep(2000);
         driver.findElement(By.xpath("//input[@type='checkbox' and @data-value='" + modelCar + "']")).click();
         Thread.sleep(10000);
-        results = driver.findElement(By.xpath("//table[@summary='Ogłoszenia']")).getText();
-        results.toLowerCase();
-
+        results = driver.findElement(By.xpath("//table[@summary='Ogłoszenia']")).getText().toLowerCase();
         boolean x = results.contains(brandCar + " " + modelCar);
         assertTrue(x);
 
