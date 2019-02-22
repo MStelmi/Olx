@@ -1,20 +1,30 @@
 package pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class HomePage {
 
+    @FindBy(linkText="Motoryzacja")
+    WebElement categoryMotoryzacja;
+
     @FindBy(linkText="Samochody osobowe")
-    WebElement categorySamochodyOsobowe;
+    WebElement subcategorySamochodyOsobowe;
 
-    @FindBy(xpath="//span[@data-default-label='Marka']")
-    WebElement marka;
+    public HomePage (WebDriver driver) {
+        super(driver);
+    }
 
-    @FindBy(xpath="//li//div//a//span[@data-default-label='Model']")
-    WebElement model;
+    public void clickMotoryzacja() {
+        categoryMotoryzacja.click();
+    }
 
-    void selectModel(String model) {
-
+    public void clickSamochodyOsobowe() {
+        subcategorySamochodyOsobowe.click();
     }
 }
+
