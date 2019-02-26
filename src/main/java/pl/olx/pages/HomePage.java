@@ -22,10 +22,10 @@ public class HomePage extends AbstractPage {
         super(driver);
     }
 
-    WebElement generateWebElementByBrandCar(String brand) {
+    public WebElement generateWebElementByBrandCar(String brand) {
         return this.driver.findElement(By.xpath("//a[@data-code='" + brand + "']"));
     }
-    WebElement generateWebElementByModelCar(String model) {
+    public WebElement generateWebElementByModelCar(String model) {
         return this.driver.findElement(By.xpath("//input[@type='checkbox' and @data-value='" + model + "']"));
     }
 

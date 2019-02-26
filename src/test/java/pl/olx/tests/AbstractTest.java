@@ -3,11 +3,14 @@ package pl.olx.tests;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.By;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pl.olx.pages.HomePage;
 import pl.olx.pages.ResultPage;
+
+import static java.lang.Thread.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AbstractTest {
 
@@ -15,7 +18,7 @@ public class AbstractTest {
     HomePage homePage = new HomePage(driver);
     ResultPage resultPage = new ResultPage(driver);
 
-    String results;
+    boolean results;
     String url = "www.olx.pl";
     String brandCar = "honda";
     String modelCar = "accord";
@@ -38,16 +41,20 @@ public class AbstractTest {
         System.out.println("session is closed");
     }
 
-    homePage.clickMotoryzacja();
-    homePage.clickSamochodyOsobowe();
-    homePage.clickMarka();
-    Thread.sleep(5000);
-    homePage.generateWebElementByBrandCar(brandCar);
-    Thread.sleep(5000);
-    homePage.ClickModel();
-    homePage.generateWebElementByModelCar(modelCar);
-    Thread.sleep(10000);
-    results = (resultPage.verifyResults(brandCar + " " + modelCar));
-    assertTrue(results);
+    @Test
+    public void searchCarTest() throws InterruptedException {
+        homePage.clickMotoryzacja();
+        homePage.clickSamochodyOsobowe();
+        homePage.clickMarka();
+        sleep(5000);
+        homePage.generateWebElementByBrandCar(brandCar);
+        sleep(5000);
+        homePage.clickModel();
+        homePage.generateWebElementByModelCar(modelCar);
+        sleep(10000);
+        results = (resultPage.verifyResults(brandCar + " " + modelCar));
+        assertTrue(results);
+    }
+
 
 }
