@@ -1,4 +1,4 @@
-package tests;
+package pl.olx.tests;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
@@ -6,15 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.openqa.selenium.support.pagefactory.AjaxElementLocatorFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.junit.jupiter.api.Assertions;
-import java.util.concurrent.TimeUnit;
 
 import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.*;
