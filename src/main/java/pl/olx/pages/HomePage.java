@@ -18,13 +18,15 @@ public class HomePage extends AbstractPage {
     @FindBy(xpath="//li//div//a//span[@data-default-label='Model']")
     WebElement model;
 
-
     public HomePage (WebDriver driver) {
         super(driver);
     }
 
     WebElement generateWebElementByBrandCar(String brand) {
         return this.driver.findElement(By.xpath("//a[@data-code='" + brand + "']"));
+    }
+    WebElement generateWebElementByModelCar(String model) {
+        return this.driver.findElement(By.xpath("//input[@type='checkbox' and @data-value='" + model + "']"));
     }
 
     public void clickMarka() {
