@@ -8,25 +8,26 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pl.olx.pages.HomePage;
 import pl.olx.pages.ResultPage;
-
-import static java.lang.Thread.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class AbstractTest {
 
     WebDriver driver;
-    HomePage homePage = new HomePage(driver);
-    ResultPage resultPage = new ResultPage(driver);
-
-    boolean results;
-    String url = "www.olx.pl";
-    String brandCar = "honda";
-    String modelCar = "accord";
+    HomePage homePage;
+    ResultPage resultPage;
 
     public void setup() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
+        homePage = new HomePage(driver);
+        resultPage = new ResultPage(driver);
     }
+
+    boolean results;
+    String url = "https://www.olx.pl/";
+    String brandCar = "honda";
+    String modelCar = "accord";
+
 
     @BeforeEach
     void openSession() {
@@ -46,15 +47,10 @@ public class AbstractTest {
         homePage.clickMotoryzacja();
         homePage.clickSamochodyOsobowe();
         homePage.clickMarka();
-        sleep(5000);
-        homePage.generateWebElementByBrandCar(brandCar);
-        sleep(5000);
+        homePage.selectBrandCar(brandCar);
         homePage.clickModel();
-        homePage.generateWebElementByModelCar(modelCar);
-        sleep(10000);
+        homePage.selectModelCar(modelCar);
         results = (resultPage.verifyResults(brandCar + " " + modelCar));
         assertTrue(results);
     }
-
-
 }
