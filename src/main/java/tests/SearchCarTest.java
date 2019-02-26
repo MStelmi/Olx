@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 import static java.lang.Thread.sleep;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class SearchCar {
+public class SearchCarTest {
 
     WebDriver driver;
     String url = "https://www.olx.pl";
